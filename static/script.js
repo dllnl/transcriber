@@ -124,7 +124,14 @@ uploadForm.addEventListener('submit', async function(e) {
         }
         
         // Passo 2: Transcrever
-        const selectedModel = modelSelect.value;
+        let selectedModel = modelSelect.value;
+        // Remove o prefixo 'whisper-' se existir, pois o backend espera apenas o nome do modelo
+        if (selectedModel.startsWith('whisper-')) {
+            selectedModel = selectedModel.replace('whisper-', '');
+        }
+        // Se o modelo for 'auto', o backend já sabe como lidar
+        // O backend espera 'tiny', 'base', etc., não 'whisper-tiny'
+        
         const transcribeResponse = await fetch(`${API_BASE_URL}/transcribe`, {
             method: 'POST',
             headers: {

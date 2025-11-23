@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transcrição de Áudio - Vosk</title>
+    <title>Transcrição de Áudio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -94,7 +94,7 @@
                 <h1 class="mb-0">
                     <i class="bi bi-mic"></i> Transcrição de Áudio
                 </h1>
-                <p class="mb-0 mt-2">Sistema local de transcrição usando Vosk</p>
+                <p class="mb-0 mt-2">Sistema de transcrição de áudio</p>
             </div>
             <div class="card-body p-4">
                 <!-- Formulário de Upload -->
@@ -123,10 +123,9 @@
                             <option value="whisper-small">Whisper Small (Melhor precisão)</option>
                             <option value="whisper-medium">Whisper Medium (Muito boa precisão)</option>
                             <option value="whisper-large">Whisper Large (Melhor precisão)</option>
-                            <option value="vosk">Vosk (Fallback)</option>
                         </select>
                         <small class="form-text text-muted">
-                            Whisper oferece melhor qualidade, mas requer Python 3.10-3.13
+                            Modelos Whisper para transcrição de alta qualidade.
                         </small>
                     </div>
                     
@@ -172,7 +171,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="static/script.js"></script>
 </body>
 </html>
-
