@@ -1,0 +1,27 @@
+# Ignorar o próprio Dockerfile e o .dockerignore
+Dockerfile
+.dockerignore
+
+# Ignorar o diretório do Git
+.git
+.gitignore
+
+# Ignorar o ambiente virtual do Python
+venv
+.venv
+
+# Ignorar cache e arquivos compilados do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar a pasta de instância, que conterá uploads e pode conter dados sensíveis.
+# Os dados de produção devem ser montados como um volume, não incluídos na imagem.
+instance/
+
+# Ignorar arquivos de documentação e configuração local
+README.md
+*.md
+*.bat
+*.ps1
