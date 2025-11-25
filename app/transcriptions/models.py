@@ -1,5 +1,6 @@
 from app.extensions import db
 from datetime import datetime
+from app.auth.models import User
 
 class Transcription(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -7,3 +8,4 @@ class Transcription(db.Model):
     text = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author = db.relationship(User, backref='transcriptions')
