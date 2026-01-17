@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 from app import create_app
 
 # Cria a instância da aplicação usando a factory function que definimos em app/__init__.py

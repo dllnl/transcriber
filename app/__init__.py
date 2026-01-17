@@ -2,8 +2,9 @@ import os
 from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 from app.extensions import db, login_manager
+from config import Config
 
-def create_app():
+def create_app(config_class=Config):
     """Cria e configura a aplicação Flask."""
     app = Flask(__name__, instance_relative_config=True, static_folder='../static', static_url_path='/static')
 
@@ -12,18 +13,11 @@ def create_app():
     # Ex: CORS(app, resources={r"/api/*": {"origins": "https://seu-dominio.com"}})
     CORS(app, supports_credentials=True)
 
-    # Configurações padrão que podem ser sobrescritas
-    app.config.from_mapping(
-        SECRET_KEY='dev',
-        UPLOAD_FOLDER=os.path.join(app.instance_path, 'uploads'),
-        MAX_CONTENT_LENGTH=700 * 1024 * 1024,
-        WHISPER_MODEL='base',
-        SQLALCHEMY_DATABASE_URI='sqlite:///' + os.path.join(app.instance_path, 'transcriber.sqlite'),
-        SQLALCHEMY_TRACK_MODIFICATIONS=False,
-        SESSION_COOKIE_SAMESITE='Lax',
-        SESSION_COOKIE_SECURE=False,  # Importante para localhost sem HTTPS
-        SESSION_COOKIE_HTTPONLY=True
-    )
+    # Configurações a partir do objeto Config
+    app.config.from_object(config_class)
+    
+    # Executa lógica de inicialização da config (ex: garantir pastas)
+    config_class.init_app(app)
 
     db.init_app(app)
     login_manager.init_app(app)
@@ -35,13 +29,6 @@ def create_app():
     def load_user(user_id):
         print(f"DEBUG: Loading user {user_id}")
         return User.query.get(int(user_id))
-
-    # Garante que a pasta de instância e a pasta de uploads existam
-    try:
-        os.makedirs(app.instance_path)
-        os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-    except OSError:
-        pass
 
     # Rota para servir o frontend
     @app.route('/')
