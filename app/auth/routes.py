@@ -29,9 +29,11 @@ def login():
     user = User.query.filter_by(username=data['username']).first()
     
     if user is None or not user.check_password(data['password']):
+        print(f"DEBUG: Login failed for {data['username']}")
         return jsonify({'error': 'Invalid username or password'}), 401
     
     login_user(user)
+    print(f"DEBUG: User {user.id} logged in successfully. Session created.")
     return jsonify({'message': 'Logged in successfully', 'user_id': user.id})
 
 @bp.route('/logout', methods=['POST'])
