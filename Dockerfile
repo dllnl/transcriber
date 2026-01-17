@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Instalar dependências do sistema, se necessário (ex: ffmpeg para o whisper)
 # O Whisper usa ffmpeg para converter formatos de áudio. É uma boa prática incluí-lo.
-RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg libsndfile1 && rm -rf /var/lib/apt/lists/*
 
 # Copiar o arquivo de dependências primeiro para aproveitar o cache do Docker
 # Se o requirements.txt não mudar, o Docker não reinstalará as dependências

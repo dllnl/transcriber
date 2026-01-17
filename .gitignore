@@ -33,3 +33,4 @@ Thumbs.db
 
 # Local files not to be committed
 local/
+.env

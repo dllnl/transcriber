@@ -8,4 +8,5 @@ class Transcription(db.Model):
     text = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    structured_data = db.Column(db.JSON)
     author = db.relationship(User, backref='transcriptions')
